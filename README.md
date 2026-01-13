@@ -1,13 +1,24 @@
-# Shoaib Ahmed - Portfolio Website
+# Shoaib Ahmed - 3D Portfolio Website
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)](https://gsap.com/)
+
+🔗 **Repository:** [github.com/ShoaibAhmedSoomro/Shoaib-Ahmed-3D-Portfolio](https://github.com/ShoaibAhmedSoomro/Shoaib-Ahmed-3D-Portfolio)
 
 A high-performance, interactive portfolio website featuring 3D character animations, smooth scroll effects, and modern web technologies. Built with React, TypeScript, Three.js, and GSAP.
 
 ![Portfolio Preview](public/images/placeholder.webp)
+
+---
+
+## 🏷️ Topics / Keywords
+
+```
+react typescript threejs portfolio gsap vite three-fiber react-three-fiber web-development frontend 3d-portfolio interactive-portfolio developer-portfolio personal-website animations scroll-animations webgl javascript responsive-design nodejs fullstack-developer
+```
 
 ---
 
@@ -177,8 +188,7 @@ graph TD
 | `@react-three/fiber` | ^8.17.10 | React renderer for Three.js |
 | `@react-three/drei` | ^9.120.4 | Three.js helpers and abstractions |
 | `@react-three/rapier` | ^1.5.0 | Physics engine for 3D |
-| `gsap` | ^3.12.7 | Animation library |
-| `gsap-trial` | ^3.12.7 | Premium GSAP plugins (ScrollSmoother, SplitText) |
+| `gsap` | ^3.12.7 | Animation library (includes ScrollSmoother, SplitText - now free!) |
 | `react-fast-marquee` | ^1.6.5 | Marquee text component |
 | `react-icons` | ^5.3.0 | Icon library |
 
@@ -195,10 +205,10 @@ graph TD
 
 ```bash
 # Clone the repository
-git clone https://github.com/ShoaibAhmedSoomro/Portfolio-Website.git
+git clone https://github.com/ShoaibAhmedSoomro/Shoaib-Ahmed-3D-Portfolio.git
 
 # Navigate to project directory
-cd Portfolio-Website
+cd Shoaib-Ahmed-3D-Portfolio
 
 # Install dependencies
 npm install
@@ -250,7 +260,7 @@ npm run dev
 | `vite.config.ts` | Vite bundler configuration |
 | `tsconfig.json` | TypeScript configuration |
 | `eslint.config.js` | ESLint rules for code quality |
-| `gsap-trial.d.ts` | TypeScript declarations for GSAP premium plugins |
+| `gsap-plugins.d.ts` | TypeScript declarations for GSAP premium plugins |
 
 ---
 
