@@ -18,7 +18,16 @@ const setCharacter = (
         "/models/character.glb",
         async (gltf) => {
           const character = gltf.scene;
-          await renderer.compileAsync(character, camera, scene);
+
+          // compileAsync is an optional perf optimization. It throws on some
+          // material configurations in three@0.168; swallow and continue so we
+          // still resolve the GLTF promise and the loader can finish.
+          try {
+            await renderer.compileAsync(character, camera, scene);
+          } catch {
+            // Fall back to lazy shader compilation on first render.
+          }
+
           character.traverse((child) => {
             const mesh = child as THREE.Mesh;
             if (mesh.isMesh) {
@@ -28,13 +37,18 @@ const setCharacter = (
             }
           });
           resolve(gltf);
-          setCharTimeline(character, camera);
-          setAllTimeline();
-          const footR = character.getObjectByName("footR");
-          const footL = character.getObjectByName("footL");
-          if (footR) footR.position.y = 3.36;
-          if (footL) footL.position.y = 3.36;
-          dracoLoader.dispose();
+
+          try {
+            setCharTimeline(character, camera);
+            setAllTimeline();
+            const footR = character.getObjectByName("footR");
+            const footL = character.getObjectByName("footL");
+            if (footR) footR.position.y = 3.36;
+            if (footL) footL.position.y = 3.36;
+            dracoLoader.dispose();
+          } catch {
+            // Non-fatal — character is already resolved.
+          }
         },
         undefined,
         (error) => reject(error)

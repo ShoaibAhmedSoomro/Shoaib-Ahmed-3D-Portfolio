@@ -113,7 +113,7 @@ export const setProgress = (setLoading: (value: number) => void) => {
         percent += Math.round(Math.random());
         setLoading(percent);
         if (percent > 91) clearInterval(interval);
-      }, 2000);
+      }, 350);
     }
   }, 100);
 
@@ -131,5 +131,7 @@ export const setProgress = (setLoading: (value: number) => void) => {
       }, 2);
     });
 
-  return { loaded };
+  const cancel = () => clearInterval(interval);
+
+  return { loaded, cancel };
 };

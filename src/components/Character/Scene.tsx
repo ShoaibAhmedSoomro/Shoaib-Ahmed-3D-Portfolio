@@ -119,29 +119,38 @@ const Scene = () => {
 
     loadCharacter()
       .then((gltf) => {
-        if (!gltf) return;
-        const animations = setAnimations(gltf);
-        if (hoverDivRef.current) {
-          hoverCleanup = animations.hover(hoverDivRef.current);
+        if (!gltf) return null;
+        try {
+          const animations = setAnimations(gltf);
+          if (hoverDivRef.current) {
+            hoverCleanup = animations.hover(hoverDivRef.current);
+          }
+          mixer = animations.mixer;
+          const character = gltf.scene;
+          loadedCharacter = character;
+          scene.add(character);
+          headBone = character.getObjectByName("spine006") || null;
+          const sl = character.getObjectByName("screenlight");
+          screenLight = (sl as THREE.Mesh) || null;
+          return animations;
+        } catch {
+          return null;
         }
-        mixer = animations.mixer;
-        const character = gltf.scene;
-        loadedCharacter = character;
-        scene.add(character);
-        headBone = character.getObjectByName("spine006") || null;
-        const sl = character.getObjectByName("screenlight");
-        screenLight = (sl as THREE.Mesh) || null;
+      })
+      .catch(() => null)
+      // Always finish the progress bar, even if loading or setup failed,
+      // so the user is never stuck at the splash screen.
+      .then((animations) => {
         progress.loaded().then(() => {
           setTimeout(
             () => {
               light.turnOnLights();
-              if (!reducedMotion) animations.startIntro();
+              if (animations && !reducedMotion) animations.startIntro();
             },
             reducedMotion ? 0 : 2500
           );
         });
-      })
-      .catch(() => {});
+      });
 
     let rafId = 0;
     const animate = () => {
@@ -166,6 +175,7 @@ const Scene = () => {
 
     return () => {
       cancelAnimationFrame(rafId);
+      progress.cancel();
       if (touchDebounce) clearTimeout(touchDebounce);
       if (resizeTimer) clearTimeout(resizeTimer);
       io.disconnect();
