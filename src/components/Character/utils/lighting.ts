@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";
+import { subscribeRgb } from "../../utils/rgbCycle";
 
 const setLighting = (scene: THREE.Scene) => {
   const directionalLight = new THREE.DirectionalLight(0xc7a9ff, 0);
@@ -18,6 +19,12 @@ const setLighting = (scene: THREE.Scene) => {
   pointLight.castShadow = true;
   scene.add(pointLight);
 
+  // Sync both lights to the global RGB hue cycle.
+  const unsubscribe = subscribeRgb((hue) => {
+    directionalLight.color.setHSL(hue / 360, 0.55, 0.75);
+    pointLight.color.setHSL(hue / 360, 0.6, 0.7);
+  });
+
   new RGBELoader()
     .setPath("/models/")
     .load("char_enviorment.hdr", function (texture) {
@@ -27,9 +34,14 @@ const setLighting = (scene: THREE.Scene) => {
       scene.environmentRotation.set(5.76, 85.85, 1);
     });
 
-  function setPointLight(screenLight: any) {
-    if (screenLight.material.opacity > 0.9) {
-      pointLight.intensity = screenLight.material.emissiveIntensity * 20;
+  function setPointLight(screenLight: THREE.Mesh | null | undefined) {
+    if (!screenLight) return;
+    const material = screenLight.material as
+      | THREE.MeshStandardMaterial
+      | undefined;
+    if (!material) return;
+    if (material.opacity > 0.9) {
+      pointLight.intensity = material.emissiveIntensity * 20;
     } else {
       pointLight.intensity = 0;
     }
@@ -55,7 +67,7 @@ const setLighting = (scene: THREE.Scene) => {
     });
   }
 
-  return { setPointLight, turnOnLights };
+  return { setPointLight, turnOnLights, dispose: unsubscribe };
 };
 
 export default setLighting;

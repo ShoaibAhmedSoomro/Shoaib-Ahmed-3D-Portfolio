@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shoaibahmedsoomro.github.io/Shoaib-Ahmed-3D-Portfolio/sitemap.xml

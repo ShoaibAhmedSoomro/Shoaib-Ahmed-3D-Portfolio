@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import setCharacter from "./utils/character";
 import setLighting from "./utils/lighting";
@@ -19,142 +19,210 @@ const Scene = () => {
   const sceneRef = useRef(new THREE.Scene());
   const { setLoading } = useLoading();
 
-  const [character, setChar] = useState<THREE.Object3D | null>(null);
   useEffect(() => {
-    if (canvasDiv.current) {
-      let rect = canvasDiv.current.getBoundingClientRect();
-      let container = { width: rect.width, height: rect.height };
-      const aspect = container.width / container.height;
-      const scene = sceneRef.current;
+    const container = canvasDiv.current;
+    if (!container) return;
 
-      const renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: true,
-      });
-      renderer.setSize(container.width, container.height);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1;
-      canvasDiv.current.appendChild(renderer.domElement);
+    const rect = container.getBoundingClientRect();
+    const aspect = rect.width / rect.height;
+    const scene = sceneRef.current;
 
-      const camera = new THREE.PerspectiveCamera(14.5, aspect, 0.1, 1000);
-      camera.position.z = 10;
-      camera.position.set(0, 13.1, 24.7);
-      camera.zoom = 1.1;
-      camera.updateProjectionMatrix();
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(rect.width, rect.height);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1;
+    container.appendChild(renderer.domElement);
 
-      let headBone: THREE.Object3D | null = null;
-      let screenLight: any | null = null;
-      let mixer: THREE.AnimationMixer;
+    const camera = new THREE.PerspectiveCamera(14.5, aspect, 0.1, 1000);
+    camera.position.set(0, 13.1, 24.7);
+    camera.zoom = 1.1;
+    camera.updateProjectionMatrix();
 
-      const clock = new THREE.Clock();
+    let headBone: THREE.Object3D | null = null;
+    let screenLight: THREE.Mesh | null = null;
+    let mixer: THREE.AnimationMixer | undefined;
+    let loadedCharacter: THREE.Object3D | null = null;
+    let hoverCleanup: (() => void) | void;
 
-      const light = setLighting(scene);
-      let progress = setProgress((value) => setLoading(value));
-      const { loadCharacter } = setCharacter(renderer, scene, camera);
+    const clock = new THREE.Clock();
+    const light = setLighting(scene);
+    const progress = setProgress((value) => setLoading(value));
+    const { loadCharacter } = setCharacter(renderer, scene, camera);
 
-      loadCharacter().then((gltf) => {
-        if (gltf) {
-          const animations = setAnimations(gltf);
-          hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
-          mixer = animations.mixer;
-          let character = gltf.scene;
-          setChar(character);
-          scene.add(character);
-          headBone = character.getObjectByName("spine006") || null;
-          screenLight = character.getObjectByName("screenlight") || null;
-          progress.loaded().then(() => {
-            setTimeout(() => {
-              light.turnOnLights();
-              animations.startIntro();
-            }, 2500);
-          });
-          window.addEventListener("resize", () =>
-            handleResize(renderer, camera, canvasDiv, character)
-          );
-        }
-      });
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-      let mouse = { x: 0, y: 0 },
-        interpolation = { x: 0.1, y: 0.2 };
+    let mouse = { x: 0, y: 0 };
+    let interpolation = { x: 0.1, y: 0.2 };
+    let touchDebounce: number | undefined;
+    let touchMoveHandler: ((e: TouchEvent) => void) | null = null;
+    let touchMoveTarget: HTMLElement | null = null;
 
-      const onMouseMove = (event: MouseEvent) => {
-        handleMouseMove(event, (x, y) => (mouse = { x, y }));
-      };
-      let debounce: number | undefined;
-      const onTouchStart = (event: TouchEvent) => {
-        const element = event.target as HTMLElement;
-        debounce = setTimeout(() => {
-          element?.addEventListener("touchmove", (e: TouchEvent) =>
-            handleTouchMove(e, (x, y) => (mouse = { x, y }))
-          );
-        }, 200);
-      };
+    const onMouseMove = (event: MouseEvent) => {
+      handleMouseMove(event, (x, y) => (mouse = { x, y }));
+    };
 
-      const onTouchEnd = () => {
-        handleTouchEnd((x, y, interpolationX, interpolationY) => {
-          mouse = { x, y };
-          interpolation = { x: interpolationX, y: interpolationY };
-        });
-      };
+    const onTouchStart = (event: TouchEvent) => {
+      const element = event.target as HTMLElement;
+      touchDebounce = window.setTimeout(() => {
+        touchMoveHandler = (e: TouchEvent) =>
+          handleTouchMove(e, (x, y) => (mouse = { x, y }));
+        touchMoveTarget = element;
+        element.addEventListener("touchmove", touchMoveHandler);
+      }, 200);
+    };
 
-      document.addEventListener("mousemove", (event) => {
-        onMouseMove(event);
-      });
-      const landingDiv = document.getElementById("landingDiv");
-      if (landingDiv) {
-        landingDiv.addEventListener("touchstart", onTouchStart);
-        landingDiv.addEventListener("touchend", onTouchEnd);
+    const onTouchEnd = () => {
+      if (touchMoveHandler && touchMoveTarget) {
+        touchMoveTarget.removeEventListener("touchmove", touchMoveHandler);
+        touchMoveHandler = null;
+        touchMoveTarget = null;
       }
-      const animate = () => {
-        requestAnimationFrame(animate);
-        if (headBone) {
-          handleHeadRotation(
-            headBone,
-            mouse.x,
-            mouse.y,
-            interpolation.x,
-            interpolation.y,
-            THREE.MathUtils.lerp
-          );
-          light.setPointLight(screenLight);
-        }
-        const delta = clock.getDelta();
-        if (mixer) {
-          mixer.update(delta);
-        }
-        renderer.render(scene, camera);
-      };
-      animate();
-      return () => {
-        clearTimeout(debounce);
-        scene.clear();
-        renderer.dispose();
-        window.removeEventListener("resize", () =>
-          handleResize(renderer, camera, canvasDiv, character!)
-        );
-        if (canvasDiv.current) {
-          canvasDiv.current.removeChild(renderer.domElement);
-        }
-        if (landingDiv) {
-          document.removeEventListener("mousemove", onMouseMove);
-          landingDiv.removeEventListener("touchstart", onTouchStart);
-          landingDiv.removeEventListener("touchend", onTouchEnd);
-        }
-      };
+      handleTouchEnd((x, y, interpolationX, interpolationY) => {
+        mouse = { x, y };
+        interpolation = { x: interpolationX, y: interpolationY };
+      });
+    };
+
+    document.addEventListener("mousemove", onMouseMove);
+    const landingDiv = document.getElementById("landingDiv");
+    if (landingDiv) {
+      landingDiv.addEventListener("touchstart", onTouchStart);
+      landingDiv.addEventListener("touchend", onTouchEnd);
     }
-  }, []);
+
+    // Debounced resize
+    let resizeTimer: number | undefined;
+    const onResize = () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        if (loadedCharacter) {
+          handleResize(renderer, camera, canvasDiv, loadedCharacter);
+        }
+      }, 150);
+    };
+    window.addEventListener("resize", onResize);
+
+    // IntersectionObserver to pause the render loop when offscreen
+    let isVisible = true;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+        });
+      },
+      { rootMargin: "100px" }
+    );
+    io.observe(container);
+
+    loadCharacter()
+      .then((gltf) => {
+        if (!gltf) return;
+        const animations = setAnimations(gltf);
+        if (hoverDivRef.current) {
+          hoverCleanup = animations.hover(hoverDivRef.current);
+        }
+        mixer = animations.mixer;
+        const character = gltf.scene;
+        loadedCharacter = character;
+        scene.add(character);
+        headBone = character.getObjectByName("spine006") || null;
+        const sl = character.getObjectByName("screenlight");
+        screenLight = (sl as THREE.Mesh) || null;
+        progress.loaded().then(() => {
+          setTimeout(
+            () => {
+              light.turnOnLights();
+              if (!reducedMotion) animations.startIntro();
+            },
+            reducedMotion ? 0 : 2500
+          );
+        });
+      })
+      .catch(() => {});
+
+    let rafId = 0;
+    const animate = () => {
+      rafId = requestAnimationFrame(animate);
+      if (!isVisible) return; // skip work when offscreen
+      if (headBone) {
+        handleHeadRotation(
+          headBone,
+          mouse.x,
+          mouse.y,
+          interpolation.x,
+          interpolation.y,
+          THREE.MathUtils.lerp
+        );
+        if (screenLight) light.setPointLight(screenLight);
+      }
+      const delta = clock.getDelta();
+      if (mixer) mixer.update(delta);
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (touchDebounce) clearTimeout(touchDebounce);
+      if (resizeTimer) clearTimeout(resizeTimer);
+      io.disconnect();
+
+      document.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("resize", onResize);
+      if (landingDiv) {
+        landingDiv.removeEventListener("touchstart", onTouchStart);
+        landingDiv.removeEventListener("touchend", onTouchEnd);
+      }
+      if (touchMoveHandler && touchMoveTarget) {
+        touchMoveTarget.removeEventListener("touchmove", touchMoveHandler);
+      }
+      if (typeof hoverCleanup === "function") hoverCleanup();
+
+      // Dispose Three.js resources
+      scene.traverse((obj) => {
+        const mesh = obj as THREE.Mesh;
+        if (mesh.isMesh) {
+          mesh.geometry?.dispose();
+          const material = mesh.material;
+          if (Array.isArray(material)) {
+            material.forEach((m) => disposeMaterial(m));
+          } else if (material) {
+            disposeMaterial(material);
+          }
+        }
+      });
+      light.dispose();
+      scene.clear();
+      renderer.dispose();
+      renderer.forceContextLoss();
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
+      }
+    };
+  }, [setLoading]);
 
   return (
-    <>
-      <div className="character-container">
-        <div className="character-model" ref={canvasDiv}>
-          <div className="character-rim"></div>
-          <div className="character-hover" ref={hoverDivRef}></div>
-        </div>
+    <div className="character-container" aria-hidden="true">
+      <div className="character-model" ref={canvasDiv}>
+        <div className="character-rim"></div>
+        <div className="character-hover" ref={hoverDivRef}></div>
       </div>
-    </>
+    </div>
   );
 };
+
+function disposeMaterial(material: THREE.Material) {
+  const m = material as THREE.MeshStandardMaterial;
+  m.map?.dispose();
+  m.normalMap?.dispose();
+  m.roughnessMap?.dispose();
+  m.metalnessMap?.dispose();
+  m.emissiveMap?.dispose();
+  m.aoMap?.dispose();
+  material.dispose();
+}
 
 export default Scene;

@@ -24,6 +24,7 @@ const Contact = () => {
             <a
               href="https://github.com/ShoaibAhmedSoomro"
               target="_blank"
+              rel="noopener noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
@@ -32,6 +33,7 @@ const Contact = () => {
             <a
               href="https://linkedin.com/in/shoaibaofficial"
               target="_blank"
+              rel="noopener noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
@@ -40,6 +42,7 @@ const Contact = () => {
             <a
               href="https://instagram.com/Shoaib_AhmedSoomro"
               target="_blank"
+              rel="noopener noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
@@ -48,6 +51,7 @@ const Contact = () => {
             <a
               href="https://facebook.com/shoaibahmedsoomroofficial"
               target="_blank"
+              rel="noopener noreferrer"
               data-cursor="disable"
               className="contact-social"
             >

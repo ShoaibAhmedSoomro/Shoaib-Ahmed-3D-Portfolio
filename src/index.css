@@ -1,4 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+*,
+*::before,
+*::after {
+  font-family: "Geist", sans-serif;
+}
+
+/* Registered custom property so the hue can be interpolated by CSS too. */
+@property --accentHue {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 270;
+}
 
 :root {
   font-family: "Geist", sans-serif;
@@ -18,19 +29,15 @@
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  --accentColor: #c2a4ff;
+
+  /* RGB cycle: --accentHue is rewritten every frame by rgbCycle.ts.
+     --accentColor automatically re-resolves with each update. */
+  --accentHue: 270;
+  --accentColor: hsl(var(--accentHue), 80%, 75%);
+
   --backgroundColor: #0b080c;
   --vh: 100vh;
   --vh: 100svh;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Geist", sans-serif;
 }
 
 body {

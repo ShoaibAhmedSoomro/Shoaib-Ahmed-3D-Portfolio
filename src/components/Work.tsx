@@ -3,6 +3,7 @@ import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { projects } from "../data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,14 +23,14 @@ const Work = () => {
         .getBoundingClientRect().left;
       const rect = box[0].getBoundingClientRect();
       const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-      let padding: number =
+      const padding: number =
         parseInt(window.getComputedStyle(box[0]).padding) / 2;
       translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
     }
 
     setTranslateX();
 
-    let timeline = gsap.timeline({
+    const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".work-section",
         start: "top top",
@@ -72,53 +73,22 @@ const Work = () => {
           My <span>Work</span>
         </h2>
         <div className="work-flex">
-          {/* Project 1: ASICO WhatsApp Bot */}
-          <div className="work-box">
-            <div className="work-info">
-              <div className="work-title">
-                <h3>01</h3>
-                <div>
-                  <h4>ASICO WhatsApp Bot</h4>
-                  <p>CRM & Automation</p>
+          {projects.map((p) => (
+            <div key={p.id} className="work-box">
+              <div className="work-info">
+                <div className="work-title">
+                  <h3>{p.id}</h3>
+                  <div>
+                    <h4>{p.title}</h4>
+                    <p>{p.category}</p>
+                  </div>
                 </div>
+                <h4>Tools and features</h4>
+                <p>{p.tools}</p>
               </div>
-              <h4>Tools and features</h4>
-              <p>Node.js, Express, MySQL, Socket.IO, WhatsApp API</p>
+              <WorkImage image={p.image} alt={p.alt} link={p.link} />
             </div>
-            <WorkImage image="/images/placeholder.webp" alt="ASICO WhatsApp Bot" link="https://github.com/ShoaibAhmedSoomro" />
-          </div>
-
-          {/* Project 2: Interactive Resume */}
-          <div className="work-box">
-            <div className="work-info">
-              <div className="work-title">
-                <h3>02</h3>
-                <div>
-                  <h4>Interactive Resume NextGen</h4>
-                  <p>Portfolio & Resume</p>
-                </div>
-              </div>
-              <h4>Tools and features</h4>
-              <p>React 19, GSAP, Framer Motion, Three.js, Tailwind</p>
-            </div>
-            <WorkImage image="/images/placeholder.webp" alt="Interactive Resume" link="https://github.com/ShoaibAhmedSoomro" />
-          </div>
-
-          {/* Project 3: High-Performance Portfolio */}
-          <div className="work-box">
-            <div className="work-info">
-              <div className="work-title">
-                <h3>03</h3>
-                <div>
-                  <h4>High-Performance Portfolio</h4>
-                  <p>Web Development</p>
-                </div>
-              </div>
-              <h4>Tools and features</h4>
-              <p>Next.js, TypeScript, React, Tailwind, Three.js</p>
-            </div>
-            <WorkImage image="/images/placeholder.webp" alt="Portfolio" link="https://github.com/ShoaibAhmedSoomro" />
-          </div>
+          ))}
         </div>
       </div>
     </div>
