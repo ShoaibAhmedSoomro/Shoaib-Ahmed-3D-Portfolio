@@ -30,7 +30,7 @@
 
 ## 1. Executive Summary
 
-This is a **high-effort, visually rich personal portfolio** built around an interactive 3D character (Three.js GLTF) with heavy GSAP scroll choreography, a physics-driven tech-stack section (React Three Fiber + Rapier), a custom loading sequence, and a custom cursor. The code is delivered as a Vite-built SPA deployable on Netlify.
+This is a **high-effort, visually rich personal portfolio** built around an interactive 3D character (Three.js GLTF) with heavy GSAP scroll choreography, a physics-driven tech-stack section (React Three Fiber + Rapier), a custom loading sequence, and a custom cursor. The code is delivered as a Vite-built SPA deployed on Vercel.
 
 **Overall quality:** Solid product, mid-grade engineering. The visuals are well-executed and the architecture (lazy loading, context-based loading state, separation of character utilities) is reasonable. However the codebase shows several anti-patterns typical of organically-grown portfolio projects: imperative DOM access inside React components, a globally-mutable `smoother` export, useEffect handlers without proper cleanup, mixed responsibilities in `Scene.tsx`, weak typing in 3D code (`any`), and a "decrypt-the-model-on-the-client" pattern that provides no real security.
 
@@ -96,7 +96,7 @@ GSAP **ScrollSmoother** wraps `#smooth-wrapper`/`#smooth-content` and most secti
 | `tsconfig.json` / `tsconfig.app.json` / `tsconfig.node.json` | TS project references. App config uses `strict: true`, `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`. | Good strictness. Build artifacts `*.tsbuildinfo` are committed (should be in `.gitignore`). |
 | `eslint.config.js` | Flat ESLint config with `@eslint/js` recommended + typescript-eslint recommended + react-hooks + react-refresh. | Good baseline. No custom rules for code style or import order. |
 | `.gitignore` | Standard. | Not inspected in depth; build info files are committed alongside, suggesting it may miss them. |
-| `netlify.toml` | Deployment config: `npm run build` → `dist/`, Node 18, SPA fallback redirect. | Correct for SPA. Node 18 is approaching EOL — bump to 20+. |
+| (Vercel) | Hosting platform. Vite SPA is autodetected; no config file needed in the repo. | Vercel auto-builds with `npm run build` and serves `dist/`. |
 | `LICENSE` | MIT. | Fine. |
 | `README.md` | Extensive feature/architecture doc, badges, mermaid diagram, recommendations checklist. | **Strong** — among the best-documented parts of the project. |
 | `Shoaib_Ahmed.md` | Personal résumé in markdown. | Content file; not used by the app. |
@@ -201,7 +201,7 @@ GSAP **ScrollSmoother** wraps `#smooth-wrapper`/`#smooth-content` and most secti
 6. **Draco-compressed GLTF + WebP** show attention to asset weight.
 7. **Linting + flat ESLint config + react-hooks + react-refresh** baseline is in place.
 8. **Responsive switching** — desktop vs mobile rendering paths are clearly separated.
-9. **Netlify config is correct** for an SPA (with redirect fallback).
+9. **Deployed on Vercel** — Vite SPA auto-detected, no config file required.
 
 ---
 
@@ -243,7 +243,7 @@ GSAP **ScrollSmoother** wraps `#smooth-wrapper`/`#smooth-content` and most secti
 - `test.js` is dead scratch code referencing undefined globals.
 - `src/assets/react.svg` (default Vite scaffold) and `Character/exports.ts` (empty file) are unused.
 - Unused dependencies: `@react-three/cannon`, `@vercel/analytics`.
-- Node 18 in `netlify.toml` is approaching EOL.
+- (resolved) Hosting Node version: pin via Vercel project settings if needed.
 - No tests, no CI workflow, no Husky/lint-staged.
 
 ### Accessibility / SEO
@@ -264,10 +264,9 @@ Ordered roughly by **impact ÷ effort**.
 2. **Add `dist/`, `*.tsbuildinfo` to `.gitignore`** and remove tracked copies.
 3. **Drop unused deps:** `@react-three/cannon`, `@vercel/analytics`.
 4. **Add `rel="noopener noreferrer"`** to all `target="_blank"` anchors.
-5. **Bump `NODE_VERSION` in `netlify.toml`** to `20`.
-6. **Fix `WorkImage.tsx`** to load videos via `import.meta.url` or from `public/`.
-7. **Either remove `character.glb`** (keep only `.enc`) or remove the decryption layer entirely.
-8. **Resolve `data-cursor={!cursor && "disable"}`** in `HoverLinks.tsx` — this currently emits the literal string `"false"` when `cursor` is true.
+5. **Fix `WorkImage.tsx`** to load videos via `import.meta.url` or from `public/`.
+6. **Either remove `character.glb`** (keep only `.enc`) or remove the decryption layer entirely.
+7. **Resolve `data-cursor={!cursor && "disable"}`** in `HoverLinks.tsx` — this currently emits the literal string `"false"` when `cursor` is true.
 
 ### Correctness fixes (1–3 days)
 
