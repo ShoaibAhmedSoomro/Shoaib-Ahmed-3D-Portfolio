@@ -17,7 +17,7 @@
   line-height: 70px;
   font-weight: 400;
   text-align: center;
-  background: linear-gradient(0deg, #7f40ff, #ffffff);
+  background: linear-gradient(0deg, var(--accentVivid), #ffffff);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -82,7 +82,7 @@
   height: 100%;
   background-image: linear-gradient(
     to top,
-    #aa42ff 20%,
+    var(--accentVivid) 20%,
     var(--accentColor) 50%,
     transparent 95%
   );
@@ -93,12 +93,12 @@
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 50%);
-  background-color: #aa42ff;
+  background-color: var(--accentVivid);
   width: 10px;
   height: 10px;
   border-radius: 50px;
-  box-shadow: 0px 0px 5px 2px #d29bff, 0px 0px 15px 8px #d097ff,
-    0px 0px 110px 20px #f2c0ff;
+  box-shadow: 0px 0px 5px 2px var(--accentLight), 0px 0px 15px 8px var(--accentMid),
+    0px 0px 110px 20px var(--accentLight);
   animation: timeline 0.8s linear infinite forwards;
 }
 
@@ -108,7 +108,7 @@
   50%,
   70%,
   90% {
-    box-shadow: 0px 0px 5px 2px #d29bff;
+    box-shadow: 0px 0px 5px 2px var(--accentLight);
   }
   10%,
   30%,
@@ -116,17 +116,17 @@
   100%,
   64%,
   80% {
-    box-shadow: 0px 0px 5px 2px #d29bff, 0px 0px 15px 5px #d097ff,
-      0px 0px 110px 20px #f2c0ff;
+    box-shadow: 0px 0px 5px 2px var(--accentLight), 0px 0px 15px 5px var(--accentMid),
+      0px 0px 110px 20px var(--accentLight);
   }
 }
 @keyframes timeline2 {
   0% {
-    box-shadow: 0px 0px 5px 2px #d29bff;
+    box-shadow: 0px 0px 5px 2px var(--accentLight);
   }
   100% {
-    box-shadow: 0px 0px 5px 2px #d29bff, 0px 0px 15px 5px #d097ff,
-      0px 0px 110px 20px #f2c0ff;
+    box-shadow: 0px 0px 5px 2px var(--accentLight), 0px 0px 15px 5px var(--accentMid),
+      0px 0px 110px 20px var(--accentLight);
   }
 }
 @media only screen and (max-width: 1400px) {

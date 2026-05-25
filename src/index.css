@@ -31,9 +31,15 @@
   -moz-user-select: none;
 
   /* RGB cycle: --accentHue is rewritten every frame by rgbCycle.ts.
-     --accentColor automatically re-resolves with each update. */
+     Everything below re-resolves automatically with each update. */
   --accentHue: 270;
   --accentColor: hsl(var(--accentHue), 80%, 75%);
+  --accentLight: hsl(var(--accentHue), 95%, 82%);
+  --accentMid: hsl(var(--accentHue), 95%, 70%);
+  --accentVivid: hsl(var(--accentHue), 100%, 60%);
+  --accentDeep: hsl(var(--accentHue), 100%, 50%);
+  --accentGlow: hsla(var(--accentHue), 100%, 50%, 0.6);
+  --accentGlowSoft: hsla(var(--accentHue), 100%, 50%, 0.65);
 
   --backgroundColor: #0b080c;
   --vh: 100vh;
