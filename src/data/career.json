@@ -1,0 +1,66 @@
+{
+  "_note": "Single source of truth for the Career section and the resume PDF (scripts/build-resume.py). Edit here only.",
+  "entries": [
+    {
+      "role": "IT Infrastructure Engineer",
+      "company": "Asico Real Estate LLC",
+      "place": "Dubai, UAE (Remote)",
+      "period": "NOW",
+      "dates": "Oct 2024 to Present",
+      "summary": "Keep company servers and cloud systems online on Google Cloud and Linux, and build the internal web tools that run on them.",
+      "points": [
+        "Kept company web apps online on Google Cloud and Linux by using Compute Engine load balancing and PM2 process management.",
+        "Built 2 internal tools: a WhatsApp Business CRM (Node.js, MySQL, live inbox, WhatsApp Cloud API) and an English and Arabic email signature generator.",
+        "Added AI-assisted replies to the CRM with OpenAI and Gemini APIs while keeping responses fast and reliable.",
+        "Manage Microsoft 365 compliance and threat-protection settings, backed by Microsoft 365 security training."
+      ]
+    },
+    {
+      "role": "Freelance Web Developer (Offline)",
+      "company": "Self-employed",
+      "place": "Sindh, Pakistan",
+      "period": "2024",
+      "dates": "Mar 2024 to Sep 2024",
+      "summary": "Built and fixed websites for local clients, working with them face to face.",
+      "points": [
+        "Delivered websites and web fixes for local clients by working with them directly, from request to handover."
+      ]
+    },
+    {
+      "role": "Web Developer",
+      "company": "Pak Affairs",
+      "place": "Islamabad, Pakistan",
+      "period": "2023-24",
+      "dates": "Jan 2023 to Feb 2024",
+      "summary": "Built website features from first version to launch over 14 months, then kept live systems stable.",
+      "points": [
+        "Delivered web features end to end over 14 months, from the first version to live release.",
+        "Made live systems more stable by refactoring code and fixing production bugs."
+      ]
+    },
+    {
+      "role": "Remote Monitoring and Control Specialist",
+      "company": "ACT Group (Wind Power Plant)",
+      "place": "Thatta, Sindh, Pakistan",
+      "period": "2020-22",
+      "dates": "Jun 2020 to Dec 2022",
+      "summary": "Monitored wind turbines remotely for 2.5 years, tracking performance trends and coordinating maintenance.",
+      "points": [
+        "Monitored turbine operations remotely for 2.5 years by watching live data around the clock.",
+        "Helped keep turbines available by spotting performance trends early and coordinating maintenance work."
+      ]
+    },
+    {
+      "role": "Intern, Cyber Crime Wing",
+      "company": "Federal Investigation Agency (FIA), NR3C",
+      "place": "Islamabad, Pakistan",
+      "period": "2019",
+      "dates": "Sep 2019 to Nov 2019",
+      "summary": "Tested web applications for security problems during a 3-month internship and learned the basics of threat research.",
+      "points": [
+        "Tested web applications for security problems and helped sort small incidents during a 3-month internship.",
+        "Learned the basics of threat research and malware analysis."
+      ]
+    }
+  ]
+}

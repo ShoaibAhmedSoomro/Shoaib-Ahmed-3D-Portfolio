@@ -11,7 +11,7 @@
 
 ## Profile
 - Current role: IT Infrastructure Engineer, Asico Real Estate LLC, Dubai (remote), since Oct 2024
-- Previous: Web Developer, Pak Affairs (2023 to 2024); Remote Monitoring & Control Specialist, ACT Group wind power plant (2020 to 2022); Intern, FIA NR3C Cyber Crime Wing (2019)
+- Previous: Freelance Web Developer, offline (Mar to Sep 2024); Web Developer, Pak Affairs (2023 to 2024); Remote Monitoring & Control Specialist, ACT Group wind power plant (2020 to 2022); Intern, FIA NR3C Cyber Crime Wing (2019)
 - Education: BS Computer Science, University of Sindh
 - Skills: JavaScript/TypeScript, React, Next.js, Node.js, Express, Python, MySQL, Google Cloud (Compute Engine, Load Balancing), Linux, CI/CD, PM2, Microsoft 365, Socket.IO, WhatsApp APIs, OpenAI/Gemini integrations, Three.js, GSAP
 

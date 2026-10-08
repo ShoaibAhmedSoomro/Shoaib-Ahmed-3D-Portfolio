@@ -8,9 +8,9 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          I am an IT infrastructure engineer and web developer with {years} years of experience. I look after servers,
-          cloud systems and company IT, and I build the web apps that run on them. I mostly work with React, Node.js,
-          Python and Linux.
+          I am an IT infrastructure engineer with {years} years in IT. I keep servers and cloud systems running on
+          Google Cloud and Linux, manage Microsoft 365 security settings, and build the Node.js, React and Python web
+          apps that run on them.
         </p>
         <ul className="about-facts" aria-label="Quick facts">
           <li><strong>{years} years</strong> of experience</li>

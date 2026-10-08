@@ -281,7 +281,7 @@ npm run dev
 **Update content**
 | What | Where |
 |------|-------|
-| Job titles / timeline | `src/data/career.ts` (and re-export `public/resume/Shoaib_Ahmed.pdf`) |
+| Job titles / timeline / resume bullets | `src/data/career.json`, then run `python scripts/build-resume.py` to rebuild `public/resume/Shoaib_Ahmed.pdf` |
 | Projects | `src/data/projects.ts` |
 | About text and quick facts | `src/components/sections/About.tsx` |
 | Skills tags | `src/components/sections/WhatIDo.tsx` |
