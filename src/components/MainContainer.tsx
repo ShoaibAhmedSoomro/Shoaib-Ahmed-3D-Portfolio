@@ -8,6 +8,9 @@ import Navbar from "./ui/Navbar";
 import SocialIcons from "./ui/SocialIcons";
 import WhatIDo from "./sections/WhatIDo";
 import Work from "./sections/Work";
+import Process from "./sections/Process";
+import Credentials from "./sections/Credentials";
+import Cta from "./sections/Cta";
 import setSplitText from "../utils/splitText";
 
 const TechStack = lazy(() => import("./sections/TechStack"));
@@ -42,10 +45,13 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <About />
             <WhatIDo />
             <Career />
+            <Process />
+            <Credentials />
             <Work />
             <Suspense fallback={<div>Loading....</div>}>
               <TechStack />
             </Suspense>
+            <Cta />
             <Contact />
           </div>
         </div>

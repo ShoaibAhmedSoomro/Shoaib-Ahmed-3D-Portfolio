@@ -12,7 +12,7 @@ export function initialFX() {
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reducedMotion) {
     // Reveal everything immediately without animations.
-    gsap.set("body", { backgroundColor: "#0b080c" });
+    gsap.set("body", { clearProps: "backgroundColor" });
     gsap.set(
       [
         ".landing-info h3",
@@ -28,10 +28,17 @@ export function initialFX() {
     );
     return;
   }
+  // Fade to the active theme background, then drop the inline style so the
+  // theme toggle can restyle the body afterwards.
   gsap.to("body", {
-    backgroundColor: "#0b080c",
+    backgroundColor: getComputedStyle(document.documentElement)
+      .getPropertyValue("--backgroundColor")
+      .trim(),
     duration: 0.5,
     delay: 1,
+    onComplete: () => {
+      gsap.set("body", { clearProps: "backgroundColor" });
+    },
   });
 
   const landingText = new SplitText(

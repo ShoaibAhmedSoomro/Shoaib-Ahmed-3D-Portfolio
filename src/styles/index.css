@@ -38,8 +38,7 @@ h6,
   font-style: normal;
   line-height: 1.5;
   scroll-behavior: smooth;
-  color-scheme: light dark;
-  color: #eae5ec;
+  color: var(--fg);
   background-color: var(--backgroundColor);
 
   font-synthesis: none;
@@ -61,9 +60,38 @@ h6,
   --accentGlow: hsla(var(--accentHue), 100%, 50%, 0.6);
   --accentGlowSoft: hsla(var(--accentHue), 100%, 50%, 0.65);
 
+  /* Semantic theme tokens: dark is the default, light overrides below. */
   --backgroundColor: #0b080c;
+  --bgDeep: #000;
+  --fg: #eae5ec;
+  --fgStrong: #fff;
+  --fgMute: #adacac;
+  --line: #363636;
+  --lineStrong: rgba(255, 255, 255, 0.3);
+  --surface: rgba(255, 255, 255, 0.12);
+  --glow: rgba(255, 255, 255, 0.5);
+  color-scheme: dark;
   --vh: 100vh;
   --vh: 100svh;
+}
+
+/* Light theme: same tokens, re-mapped. Accents get darker for contrast. */
+:root[data-theme="light"] {
+  --backgroundColor: #f6f3f8;
+  --bgDeep: #ebe6f0;
+  --fg: #1a1420;
+  --fgStrong: #0b080c;
+  --fgMute: #5b5563;
+  --line: #d3cbdb;
+  --lineStrong: rgba(26, 20, 32, 0.28);
+  --surface: rgba(26, 20, 32, 0.07);
+  --glow: rgba(26, 20, 32, 0.25);
+  --accentColor: hsl(var(--accentHue), 75%, 38%);
+  --accentLight: hsl(var(--accentHue), 80%, 45%);
+  --accentMid: hsl(var(--accentHue), 85%, 50%);
+  --accentVivid: hsl(var(--accentHue), 90%, 45%);
+  --accentDeep: hsl(var(--accentHue), 100%, 40%);
+  color-scheme: light;
 }
 
 body {
@@ -99,7 +127,7 @@ main {
 body {
   margin: 0;
   height: auto;
-  background-color: #000;
+  background-color: var(--bgDeep);
   flex-grow: 1;
   --cWidth: calc(100% - 30px);
   --cMaxWidth: 1920px;

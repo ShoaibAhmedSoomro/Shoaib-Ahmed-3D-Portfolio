@@ -11,27 +11,27 @@ export const careerEntries: CareerEntry[] = [
     company: "Asico Real Estate LLC — Dubai (Remote)",
     period: "NOW",
     description:
-      "Build and maintain internal and customer-facing web applications; integrate AI-assisted experiences while focusing on maintainability.",
+      "Keeping the infrastructure healthy and the web apps shipping: internal tools, customer-facing platforms and AI-assisted features, all built to be maintained, not just launched.",
   },
   {
     role: "Web Developer",
     company: "Pak Affairs — Islamabad",
     period: "2023-24",
     description:
-      "Delivered web features end-to-end and supported production troubleshooting; improved stability via refactoring and bug fixes.",
+      "Took web features from idea to production, then stayed to hunt the bugs and refactor the rough edges until things stopped breaking.",
   },
   {
     role: "Remote Monitoring & Control Specialist",
     company: "ACT Group (Wind Power Plant)",
     period: "2020-22",
     description:
-      "Monitored real-time turbine operations, analyzed trends, and coordinated maintenance actions in a high-reliability environment.",
+      "Watched live turbine data around the clock, spotted trends before they became faults and coordinated maintenance, where downtime is measured in megawatts.",
   },
   {
     role: "Intern — Cyber Crime Wing",
     company: "Federal Investigation Agency (FIA), NR3C",
     period: "2019",
     description:
-      "Assisted with web application security testing and minor incident triage; gained exposure to threat research and malware analysis.",
+      "First taste of the other side: security-testing web apps, triaging small incidents and peeking into threat research and malware analysis.",
   },
 ];

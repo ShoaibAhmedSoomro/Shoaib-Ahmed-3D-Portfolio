@@ -56,17 +56,17 @@
   font-size: 15px;
   line-height: 15px;
   font-weight: 600;
-  color: #5e5e5e;
+  color: var(--fgMute);
   cursor: pointer;
   transition: 0.5s;
   transform-origin: left bottom;
   transform: translateX(100%) rotateZ(-90deg);
 }
 .resume-button:hover {
-  color: #fff;
+  color: var(--fgStrong);
 }
 div.resume-button span {
-  color: #fff;
+  color: var(--fgStrong);
   font-size: 17px;
   margin-top: -1px;
   display: flex;
@@ -77,7 +77,7 @@ div.resume-button span {
   top: 655px;
   left: 0;
   height: 1px;
-  background-color: #ffffff;
+  background-color: var(--fgStrong);
   width: 100%;
   z-index: 99999;
 }

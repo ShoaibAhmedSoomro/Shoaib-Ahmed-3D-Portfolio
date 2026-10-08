@@ -27,12 +27,21 @@ const Scene = () => {
     const aspect = rect.width / rect.height;
     const scene = sceneRef.current;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+      powerPreference: "high-performance",
+    });
     renderer.setSize(rect.width, rect.height);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    // Cap DPR: 3x phones would render 9x the pixels for no visible gain.
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
     container.appendChild(renderer.domElement);
+    const onContextLost = (e: Event) => e.preventDefault();
+    const onContextRestored = () => renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.domElement.addEventListener("webglcontextlost", onContextLost);
+    renderer.domElement.addEventListener("webglcontextrestored", onContextRestored);
 
     const camera = new THREE.PerspectiveCamera(14.5, aspect, 0.1, 1000);
     camera.position.set(0, 13.1, 24.7);
@@ -95,9 +104,12 @@ const Scene = () => {
 
     // Debounced resize
     let resizeTimer: number | undefined;
+    let lastWidth = window.innerWidth;
     const onResize = () => {
       if (resizeTimer) clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
+        if (window.innerWidth === lastWidth) return;
+        lastWidth = window.innerWidth;
         if (loadedCharacter) {
           handleResize(renderer, camera, canvasDiv, loadedCharacter);
         }
@@ -167,7 +179,8 @@ const Scene = () => {
         );
         if (screenLight) light.setPointLight(screenLight);
       }
-      const delta = clock.getDelta();
+      // Clamp so a background-tab pause never makes the animation jump.
+      const delta = Math.min(clock.getDelta(), 0.1);
       if (mixer) mixer.update(delta);
       renderer.render(scene, camera);
     };
@@ -204,6 +217,8 @@ const Scene = () => {
           }
         }
       });
+      renderer.domElement.removeEventListener("webglcontextlost", onContextLost);
+      renderer.domElement.removeEventListener("webglcontextrestored", onContextRestored);
       light.dispose();
       scene.clear();
       renderer.dispose();

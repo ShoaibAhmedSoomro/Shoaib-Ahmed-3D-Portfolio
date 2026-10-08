@@ -1,6 +1,64 @@
 import { useEffect, useRef } from "react";
 import "../../styles/WhatIDo.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { IconType } from "react-icons";
+import {
+  SiGithubactions,
+  SiGooglecloud,
+  SiGreensock,
+  SiJavascript,
+  SiLinux,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiExpress,
+  SiPython,
+  SiReact,
+  SiSocketdotio,
+  SiTailwindcss,
+  SiThreedotjs,
+  SiTypescript,
+} from "react-icons/si";
+import { FaMicrosoft } from "react-icons/fa6";
+import { LuCode, LuPlug, LuSmartphone, LuSparkles } from "react-icons/lu";
+
+type Tag = [string, IconType];
+
+const frontendTags: Tag[] = [
+  ["JavaScript", SiJavascript],
+  ["TypeScript", SiTypescript],
+  ["React", SiReact],
+  ["Next.js", SiNextdotjs],
+  ["Three.js", SiThreedotjs],
+  ["GSAP", SiGreensock],
+  ["Tailwind CSS", SiTailwindcss],
+  ["Responsive UI", LuSmartphone],
+];
+
+const backendTags: Tag[] = [
+  ["Node.js", SiNodedotjs],
+  ["Express.js", SiExpress],
+  ["Python", SiPython],
+  ["REST APIs", LuPlug],
+  ["MySQL", SiMysql],
+  ["Google Cloud", SiGooglecloud],
+  ["Socket.IO", SiSocketdotio],
+  ["AI Integration", LuSparkles],
+  ["Linux", SiLinux],
+  ["CI/CD", SiGithubactions],
+  ["Microsoft 365", FaMicrosoft],
+  ["Clean code", LuCode],
+];
+
+const Tags = ({ items }: { items: Tag[] }) => (
+  <>
+    {items.map(([label, Icon]) => (
+      <div className="what-tags" key={label}>
+        <Icon aria-hidden="true" /> {label}
+      </div>
+    ))}
+  </>
+);
 
 const WhatIDo = () => {
   const containerRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -85,21 +143,14 @@ const WhatIDo = () => {
 
             <div className="what-content-in">
               <h3>FRONTEND</h3>
-              <h4>Description</h4>
+              <h4>The pitch</h4>
               <p>
-                Building responsive, accessible web interfaces with modern
-                frameworks and performance-friendly UI effects.
+                Interfaces that load fast, look sharp and get out of the
+                user's way, with just enough motion to be remembered.
               </p>
-              <h5>Skillset & tools</h5>
+              <h5>Tools of the trade</h5>
               <div className="what-content-flex">
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">Three.js</div>
-                <div className="what-tags">GSAP</div>
-                <div className="what-tags">Tailwind CSS</div>
-                <div className="what-tags">Responsive UI</div>
+                <Tags items={frontendTags} />
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -124,24 +175,14 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
             <div className="what-content-in">
               <h3>BACKEND & CLOUD</h3>
-              <h4>Description</h4>
+              <h4>The pitch</h4>
               <p>
-                Creating reliable APIs, integrating AI features, and deploying
-                scalable solutions with cloud infrastructure.
+                The engine room: APIs that answer, servers that stay up,
+                and AI features that actually earn their place.
               </p>
-              <h5>Skillset & tools</h5>
+              <h5>Tools of the trade</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">Python</div>
-                <div className="what-tags">REST APIs</div>
-                <div className="what-tags">MySQL</div>
-                <div className="what-tags">Google Cloud</div>
-                <div className="what-tags">Socket.IO</div>
-                <div className="what-tags">AI Integration</div>
-                <div className="what-tags">Linux</div>
-                <div className="what-tags">CI/CD</div>
-                <div className="what-tags">Microsoft 365</div>
+                <Tags items={backendTags} />
               </div>
               <div className="what-arrow"></div>
             </div>

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
+import ThemeToggle from "./ThemeToggle";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import "../../styles/Navbar.css";
@@ -13,8 +14,8 @@ const Navbar = () => {
     const smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
+      smooth: 1.2,
+      speed: 1,
       effects: true,
       autoResize: true,
       ignoreMobileResize: true,
@@ -85,6 +86,9 @@ const Navbar = () => {
               <a data-href="#contact" href="#contact" aria-label="Go to Contact section">
                 <HoverLinks text="CONTACT" />
               </a>
+            </li>
+            <li>
+              <ThemeToggle />
             </li>
           </ul>
         </nav>

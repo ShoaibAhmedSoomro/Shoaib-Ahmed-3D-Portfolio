@@ -14,4 +14,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://shoaibahmedsoomro.com/sitemap.xml
+Sitemap: https://shoaibahmedsoomro.eu.cc/sitemap.xml

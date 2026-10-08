@@ -6,9 +6,9 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Full-stack developer with 13+ years of experience shipping web products end-to-end (frontend, backend, cloud deployment).
-          Strong in React, Node.js, and Python; experienced integrating AI features and building reliable, maintainable systems.
-          Focused on clean architecture, performance, and measurable business impact.
+          I build what you see and what keeps it standing: React on the front, Node and Python behind it, Linux and cloud
+          underneath, with a little AI where it earns its keep. 13+ years in, I still care about the same thing: software
+          that is a joy to use and boring to run.
         </p>
         <ul className="about-facts" aria-label="Quick facts">
           <li><strong>13+</strong> years</li>

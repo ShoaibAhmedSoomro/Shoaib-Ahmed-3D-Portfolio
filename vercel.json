@@ -3,14 +3,8 @@
   "redirects": [
     {
       "source": "/:path(.*)",
-      "has": [{ "type": "host", "value": "shoaibahmedsoomro.eu.cc" }],
-      "destination": "https://shoaibahmedsoomro.com/:path",
-      "permanent": true
-    },
-    {
-      "source": "/:path(.*)",
-      "has": [{ "type": "host", "value": "www.shoaibahmedsoomro.com" }],
-      "destination": "https://shoaibahmedsoomro.com/:path",
+      "has": [{ "type": "host", "value": "www.shoaibahmedsoomro.eu.cc" }],
+      "destination": "https://shoaibahmedsoomro.eu.cc/:path",
       "permanent": true
     }
   ],

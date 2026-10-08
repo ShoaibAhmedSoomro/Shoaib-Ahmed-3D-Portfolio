@@ -98,6 +98,7 @@
   opacity: 0;
 }
 .character-model {
+  will-change: transform;
   height: 80%;
   height: 80vh;
   position: absolute;

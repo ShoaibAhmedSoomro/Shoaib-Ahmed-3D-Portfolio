@@ -1,5 +1,21 @@
 import * as THREE from "three";
-import { useRef, useMemo, useState, useEffect } from "react";
+import { Component, useRef, useMemo, useState, useEffect, type ReactNode } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import type { IconType } from "react-icons";
+import {
+  SiExpress,
+  SiGooglecloud,
+  SiJavascript,
+  SiLinux,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPython,
+  SiReact,
+  SiThreedotjs,
+  SiTypescript,
+} from "react-icons/si";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
@@ -11,16 +27,59 @@ import {
   RapierRigidBody,
 } from "@react-three/rapier";
 
-const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
-  "/images/node2.webp",
-  "/images/express.webp",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
+// Official brand glyphs (Simple Icons via react-icons) rendered to canvas textures.
+const techs: { Icon: IconType; label: string; color: string }[] = [
+  { Icon: SiReact, label: "React", color: "#61DAFB" },
+  { Icon: SiNextdotjs, label: "Next.js", color: "#000000" },
+  { Icon: SiNodedotjs, label: "Node.js", color: "#5FA04E" },
+  { Icon: SiExpress, label: "Express", color: "#000000" },
+  { Icon: SiMongodb, label: "MongoDB", color: "#47A248" },
+  { Icon: SiMysql, label: "MySQL", color: "#4479A1" },
+  { Icon: SiTypescript, label: "TypeScript", color: "#3178C6" },
+  { Icon: SiJavascript, label: "JavaScript", color: "#F7DF1E" },
+  { Icon: SiPython, label: "Python", color: "#3776AB" },
+  { Icon: SiLinux, label: "Linux", color: "#FCC624" },
+  { Icon: SiGooglecloud, label: "Google Cloud", color: "#4285F4" },
+  { Icon: SiThreedotjs, label: "Three.js", color: "#000000" },
 ];
+
+function makeTexture({ Icon, label, color }: (typeof techs)[number]) {
+  const svg = renderToStaticMarkup(<Icon size={420} color={color} />);
+  const img = new Image();
+  const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  return new Promise<THREE.CanvasTexture>((resolve, reject) => {
+    img.onload = () => {
+      const c = document.createElement("canvas");
+      c.width = 1404;
+      c.height = 966;
+      const g = c.getContext("2d")!;
+      g.fillStyle = "#ffffff";
+      g.fillRect(0, 0, c.width, c.height);
+      g.drawImage(img, (c.width - 420) / 2, 170, 420, 420);
+      g.fillStyle = "#1c1820";
+      g.font = "600 110px 'Plus Jakarta Sans', system-ui, sans-serif";
+      g.textAlign = "center";
+      g.fillText(label, c.width / 2, 760);
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 4;
+      resolve(tex);
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+/** A failed asset (HDR, WASM, WebGL) must never take the whole page down. */
+class CanvasBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
@@ -124,31 +183,37 @@ const TechStack = () => {
   // Lazily load textures + create materials only when we'll actually render.
   useEffect(() => {
     if (!shouldMount || materials.length > 0) return;
-    const loader = new THREE.TextureLoader();
-    const mats = imageUrls.map(
-      (url) =>
-        new THREE.MeshPhysicalMaterial({
-          map: loader.load(url),
-          emissive: "#ffffff",
-          emissiveMap: loader.load(url),
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
-        })
-    );
-    setMaterials(mats);
+    let cancelled = false;
+    let mats: THREE.MeshPhysicalMaterial[] = [];
+    Promise.all(techs.map(makeTexture))
+      .then((textures) => {
+        mats = textures.map(
+          (map) =>
+            new THREE.MeshPhysicalMaterial({
+              map,
+              emissive: "#ffffff",
+              emissiveMap: map,
+              emissiveIntensity: 0.3,
+              metalness: 0.5,
+              roughness: 1,
+              clearcoat: 0.1,
+            })
+        );
+        if (!cancelled) setMaterials(mats);
+        else mats.forEach((m) => m.dispose());
+      })
+      .catch(() => undefined);
     return () => {
+      cancelled = true;
       mats.forEach((m) => {
         m.map?.dispose();
-        m.emissiveMap?.dispose();
         m.dispose();
       });
     };
   }, [shouldMount]);
 
   const spheres = useMemo(
-    () => createSpheres(sphereCount, imageUrls.length),
+    () => createSpheres(sphereCount, techs.length),
     [sphereCount]
   );
 
@@ -171,8 +236,9 @@ const TechStack = () => {
 
   return (
     <div className="techstack" ref={containerRef}>
-      <h2> My Techstack</h2>
+      <h2>The toolbox</h2>
       {shouldMount && materials.length > 0 && (
+        <CanvasBoundary>
         <Canvas
           shadows
           gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
@@ -210,6 +276,7 @@ const TechStack = () => {
             <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
           </EffectComposer>
         </Canvas>
+        </CanvasBoundary>
       )}
     </div>
   );
