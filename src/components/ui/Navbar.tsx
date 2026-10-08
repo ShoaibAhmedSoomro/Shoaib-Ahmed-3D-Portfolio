@@ -3,8 +3,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
-import "./styles/Navbar.css";
-import { setSmoother, getSmoother } from "./utils/smootherRegistry";
+import "../../styles/Navbar.css";
+import { setSmoother, getSmoother } from "../../utils/smootherRegistry";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 

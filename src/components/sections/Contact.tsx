@@ -1,5 +1,5 @@
 import { MdArrowOutward, MdCopyright } from "react-icons/md";
-import "./styles/Contact.css";
+import "../../styles/Contact.css";
 
 const Contact = () => {
   return (
@@ -65,6 +65,11 @@ const Contact = () => {
             <h5>
               <MdCopyright /> {new Date().getFullYear()}
             </h5>
+            <nav className="contact-legal" aria-label="Legal">
+              <a href="/privacy" data-cursor="disable">Privacy</a>
+              <a href="/terms" data-cursor="disable">Terms</a>
+              <a href="/disclaimer" data-cursor="disable">Disclaimer</a>
+            </nav>
           </div>
         </div>
       </div>

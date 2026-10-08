@@ -1,7 +1,24 @@
 *,
 *::before,
 *::after {
-  font-family: "Geist", sans-serif;
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-head);
+  letter-spacing: -0.01em;
+}
+
+h5,
+h6,
+.what-tags,
+.navbar-connect,
+.career-info-box h5,
+.contact-box h4 {
+  font-family: var(--font-mono);
 }
 
 /* Registered custom property so the hue can be interpolated by CSS too. */
@@ -12,7 +29,10 @@
 }
 
 :root {
-  font-family: "Geist", sans-serif;
+  --font-head: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-body);
 
   font-optical-sizing: auto;
   font-style: normal;

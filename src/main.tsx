@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import "./index.css";
-import { startRgbCycle } from "./components/utils/rgbCycle";
+import "./styles/index.css";
+import { startRgbCycle } from "./utils/rgbCycle";
 
 startRgbCycle();
 

@@ -1,9 +1,9 @@
 import { useLayoutEffect } from "react";
-import "./styles/Work.css";
+import "../../styles/Work.css";
 import WorkImage from "./WorkImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { projects } from "../data/projects";
+import { projects } from "../../data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://shoaibahmedsoomro.github.io/Shoaib-Ahmed-3D-Portfolio/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://shoaibahmedsoomro.com/</loc><lastmod>2026-10-08</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://shoaibahmedsoomro.com/privacy</loc><lastmod>2026-10-08</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://shoaibahmedsoomro.com/terms</loc><lastmod>2026-10-08</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://shoaibahmedsoomro.com/disclaimer</loc><lastmod>2026-10-08</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

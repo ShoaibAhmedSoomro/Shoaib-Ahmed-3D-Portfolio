@@ -7,7 +7,7 @@ export interface CareerEntry {
 
 export const careerEntries: CareerEntry[] = [
   {
-    role: "Web Developer",
+    role: "IT Infrastructure Engineer",
     company: "Asico Real Estate LLC — Dubai (Remote)",
     period: "NOW",
     description:

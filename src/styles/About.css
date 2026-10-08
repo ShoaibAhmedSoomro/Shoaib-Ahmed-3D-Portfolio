@@ -30,6 +30,29 @@
   letter-spacing: 1px;
 }
 
+.about-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+}
+
+.about-facts li {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 8px 14px;
+  border: 1px solid hsla(var(--accentHue), 80%, 75%, 0.35);
+  border-radius: 999px;
+  opacity: 0.9;
+}
+
+.about-facts strong {
+  color: var(--accentColor);
+  font-weight: 600;
+}
+
 @media only screen and (min-width: 600px) {
   .about-section {
     justify-content: center;

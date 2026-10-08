@@ -2,65 +2,95 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/webp" href="/images/logo.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0b080c" />
-    <meta name="description" content="Shoaib Ahmed - Full-Stack Developer specializing in React, Node.js, and cloud solutions. Building reliable, maintainable web applications." />
-    <meta name="keywords" content="Shoaib Ahmed, Full-Stack Developer, React, Node.js, Web Developer, Portfolio" />
+    <title>Shoaib Ahmed — IT Infrastructure Engineer &amp; Full-Stack Developer</title>
+    <meta name="description" content="Portfolio of Shoaib Ahmed, IT Infrastructure Engineer at Asico Real Estate (Dubai) and full-stack developer: React, Node.js, Python, Google Cloud, Linux and AI integrations." />
+    <meta name="keywords" content="Shoaib Ahmed, IT Infrastructure Engineer, Full-Stack Developer, React, Node.js, Python, Google Cloud, Linux, Portfolio, Pakistan, Dubai" />
     <meta name="author" content="Shoaib Ahmed" />
-    <link rel="canonical" href="https://shoaibahmedsoomro.github.io/Shoaib-Ahmed-3D-Portfolio/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#0b080c" />
+    <link rel="canonical" href="https://shoaibahmedsoomro.com/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
 
-    <!-- Geist font (the only font used in the app) -->
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts: Bricolage Grotesque (headings), Plus Jakarta Sans (body), JetBrains Mono (labels) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@300..700&family=Plus+Jakarta+Sans:wght@200..800&display=swap"
     />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Shoaib Ahmed — Full-Stack Developer | Engineer" />
-    <meta property="og:description" content="Interactive 3D portfolio of Shoaib Ahmed — Full-Stack Developer (React, Node.js, cloud)." />
-    <meta property="og:image" content="/images/logo.webp" />
+    <meta property="og:site_name" content="Shoaib Ahmed" />
+    <meta property="og:url" content="https://shoaibahmedsoomro.com/" />
+    <meta property="og:title" content="Shoaib Ahmed — IT Infrastructure Engineer &amp; Full-Stack Developer" />
+    <meta property="og:description" content="Interactive 3D portfolio: IT infrastructure, cloud and full-stack web development (React, Node.js, Python)." />
+    <meta property="og:image" content="https://shoaibahmedsoomro.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Shoaib Ahmed — IT Infrastructure Engineer and Full-Stack Developer" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Shoaib Ahmed — Full-Stack Developer | Engineer" />
-    <meta name="twitter:description" content="Interactive 3D portfolio of Shoaib Ahmed — Full-Stack Developer (React, Node.js, cloud)." />
-    <meta name="twitter:image" content="/images/logo.webp" />
+    <meta name="twitter:title" content="Shoaib Ahmed — IT Infrastructure Engineer &amp; Full-Stack Developer" />
+    <meta name="twitter:description" content="Interactive 3D portfolio: IT infrastructure, cloud and full-stack web development." />
+    <meta name="twitter:image" content="https://shoaibahmedsoomro.com/og-image.png" />
 
-    <!-- Structured data: Person -->
+    <!-- Structured data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Shoaib Ahmed",
-        "jobTitle": "Full-Stack Developer",
-        "email": "mailto:soomro.shoaibahmed@gmail.com",
-        "url": "https://github.com/ShoaibAhmedSoomro/Shoaib-Ahmed-3D-Portfolio",
-        "sameAs": [
-          "https://github.com/ShoaibAhmedSoomro",
-          "https://linkedin.com/in/shoaibaofficial",
-          "https://instagram.com/Shoaib_AhmedSoomro",
-          "https://facebook.com/shoaibahmedsoomroofficial"
-        ],
-        "knowsAbout": [
-          "React",
-          "Node.js",
-          "TypeScript",
-          "Three.js",
-          "GSAP",
-          "Full-stack web development"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://shoaibahmedsoomro.com/#website",
+            "url": "https://shoaibahmedsoomro.com/",
+            "name": "Shoaib Ahmed — Portfolio",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://shoaibahmedsoomro.com/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://shoaibahmedsoomro.com/#person",
+            "name": "Shoaib Ahmed",
+            "alternateName": "Shoaib Ahmed Soomro",
+            "url": "https://shoaibahmedsoomro.com/",
+            "image": "https://shoaibahmedsoomro.com/og-image.png",
+            "jobTitle": "IT Infrastructure Engineer",
+            "worksFor": { "@type": "Organization", "name": "Asico Real Estate LLC", "address": { "@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE" } },
+            "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Sindh" },
+            "email": "mailto:soomro.shoaibahmed@gmail.com",
+            "address": { "@type": "PostalAddress", "addressRegion": "Sindh", "addressCountry": "PK" },
+            "sameAs": [
+              "https://github.com/ShoaibAhmedSoomro",
+              "https://linkedin.com/in/shoaibaofficial",
+              "https://instagram.com/Shoaib_AhmedSoomro",
+              "https://facebook.com/shoaibahmedsoomroofficial"
+            ],
+            "knowsAbout": ["IT infrastructure", "Linux", "Google Cloud", "Microsoft 365", "React", "Node.js", "TypeScript", "Python", "Three.js", "GSAP"]
+          }
         ]
       }
     </script>
-
-    <title>Shoaib Ahmed - Full-Stack Developer | Engineer</title>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="color: #eae5ec; font-family: sans-serif; padding: 2rem">
+        Shoaib Ahmed — IT Infrastructure Engineer &amp; Full-Stack Developer. This portfolio needs JavaScript for its 3D
+        scene. Email: soomro.shoaibahmed@gmail.com · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a>
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

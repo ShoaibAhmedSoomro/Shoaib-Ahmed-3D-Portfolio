@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import "./styles/Landing.css";
+import "../../styles/Landing.css";
 
 const Landing = ({ children }: PropsWithChildren) => {
   return (

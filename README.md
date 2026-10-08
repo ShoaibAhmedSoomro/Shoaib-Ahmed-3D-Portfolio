@@ -46,13 +46,15 @@ Portfolio-Website/
 │   ├── draco/                  # Draco decoder for compressed 3D models
 │   └── resume/                 # Downloadable resume PDF
 ├── src/
-│   ├── components/             # React components
+│   ├── components/
 │   │   ├── Character/          # 3D character scene and utilities
-│   │   ├── styles/             # Component-specific CSS files
-│   │   └── utils/              # Animation and scroll utilities
+│   │   ├── sections/           # Page sections (Landing, About, Work, ...)
+│   │   ├── ui/                 # Shared UI (Navbar, Cursor, Loading, ...)
+│   │   └── MainContainer.tsx   # Section layout
 │   ├── context/                # React context providers
 │   ├── data/                   # Static data files
-│   └── assets/                 # Additional assets
+│   ├── styles/                 # All CSS
+│   └── utils/                  # Animation and scroll utilities
 ├── index.html                  # HTML entry point
 ├── vite.config.ts              # Vite configuration
 └── package.json                # Dependencies and scripts
@@ -275,36 +277,28 @@ npm run dev
 
 ---
 
-## 🛠️ Recommendations for Improvement
+## 📘 Maintenance Guide
 
-### Performance
-- [ ] Implement image lazy loading for Work section
-- [ ] Add service worker for offline support
-- [ ] Consider using `react-intersection-observer` for scroll-triggered lazy loading
+**Update content**
+| What | Where |
+|------|-------|
+| Job titles / timeline | `src/data/career.ts` (and re-export `public/resume/Shoaib_Ahmed.pdf`) |
+| Projects | `src/data/projects.ts` |
+| About text and quick facts | `src/components/sections/About.tsx` |
+| Skills tags | `src/components/sections/WhatIDo.tsx` |
 
-### Features
-- [ ] Add project detail modal/page
-- [ ] Implement dark/light theme toggle
-- [ ] Add blog section integration
-- [ ] Implement contact form with backend
+**Fonts** (loaded in `index.html`, tokens in `src/styles/index.css`): Bricolage Grotesque for headings (`--font-head`), Plus Jakarta Sans for body (`--font-body`), JetBrains Mono for labels (`--font-mono`).
 
-### Code Quality
-- [ ] Add unit tests with Vitest
-- [ ] Add E2E tests with Playwright
-- [ ] Implement error boundaries for 3D components
-- [ ] Add loading fallbacks for all Suspense boundaries
+**Icons & branding** — the logo is an "S" inside curly braces, a developer and server-rack motif (`public/favicon.svg`, concepts in `logos/`). Derived files: `favicon.ico`, `favicon-16/32.png`, `apple-touch-icon.png`, `icon-192/512.png`, `icon-maskable-512.png`, `og-image.png` (1200×630) and the white `images/logo.webp` used in the navbar/loader. Regenerate them all if the logo changes.
 
-### Accessibility
-- [ ] Add ARIA labels to interactive elements
-- [ ] Implement keyboard navigation for Work section
-- [ ] Add reduced motion preferences support
-- [ ] Improve color contrast ratios
+**SEO checklist** (primary domain `https://shoaibahmedsoomro.com`; `shoaibahmedsoomro.eu.cc` and `www.` redirect to it via `vercel.json`)
+- `index.html`: title, description, canonical, Open Graph/Twitter, JSON-LD (`WebSite` + `Person`)
+- `public/robots.txt`, `public/sitemap.xml`, `public/llms.txt`, `public/site.webmanifest`
+- When the domain or job title changes, update all of the above plus `public/*.html`.
 
-### SEO
-- [ ] Add Open Graph meta tags for social sharing
-- [ ] Implement structured data (JSON-LD)
-- [ ] Add sitemap.xml
-- [ ] Add robots.txt
+**Static pages** — `public/privacy.html`, `terms.html`, `disclaimer.html` and `404.html` share `public/legal.css`; Vercel serves them at `/privacy`, `/terms`, `/disclaimer` (`cleanUrls`) and uses `404.html` for unknown URLs. Add new ones to `sitemap.xml`.
+
+**Deploy** — push to `main`; Vercel builds with `npm run build` (output `dist/`).
 
 ---
 

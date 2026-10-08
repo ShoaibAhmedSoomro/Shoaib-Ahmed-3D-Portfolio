@@ -1,5 +1,5 @@
-import "./styles/Career.css";
-import { careerEntries } from "../data/career";
+import "../../styles/Career.css";
+import { careerEntries } from "../../data/career";
 
 const Career = () => {
   return (

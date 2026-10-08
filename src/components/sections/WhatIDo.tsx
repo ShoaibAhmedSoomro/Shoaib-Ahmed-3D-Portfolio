@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./styles/WhatIDo.css";
+import "../../styles/WhatIDo.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const WhatIDo = () => {
@@ -139,6 +139,9 @@ const WhatIDo = () => {
                 <div className="what-tags">Google Cloud</div>
                 <div className="what-tags">Socket.IO</div>
                 <div className="what-tags">AI Integration</div>
+                <div className="what-tags">Linux</div>
+                <div className="what-tags">CI/CD</div>
+                <div className="what-tags">Microsoft 365</div>
               </div>
               <div className="what-arrow"></div>
             </div>

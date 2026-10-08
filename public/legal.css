@@ -1,0 +1,19 @@
+:root{--bg:#0b080c;--fg:#eae5ec;--mut:#a79fb0;--ac:#b388ff;--ac2:#4de1ff;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--ac);text-underline-offset:3px}
+a:hover{color:var(--ac2)}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding-top:28px;padding-bottom:12px}
+header img{width:44px;height:44px;border-radius:12px}
+header a.back{font:500 13px "JetBrains Mono",ui-monospace,Consolas,monospace;text-decoration:none}
+h1{font:700 clamp(2.2rem,6vw,3.4rem)/1.1 "Bricolage Grotesque","Plus Jakarta Sans",sans-serif;letter-spacing:-.02em;margin:32px 0 6px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font:600 1.25rem "Bricolage Grotesque","Plus Jakarta Sans",sans-serif;margin:2rem 0 .4rem}
+p,li{color:#d6d0dc}
+.meta{font:400 13px "JetBrains Mono",ui-monospace,Consolas,monospace;color:var(--mut)}
+footer{padding-top:32px;padding-bottom:48px;border-top:1px solid #2a2330;margin-top:48px;font-size:14px;color:var(--mut)}
+footer a{margin-right:16px}
+.nf{min-height:100vh;display:grid;place-content:center;text-align:center;padding:20px}
+.nf h1{font-size:clamp(5rem,22vw,11rem);margin:0}
+.nf p{max-width:30rem;margin:0 auto 1.5rem}
+.btn{display:inline-block;padding:12px 24px;border-radius:999px;border:1px solid var(--ac);text-decoration:none}

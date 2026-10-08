@@ -114,3 +114,15 @@ a.contact-social {
     width: calc(100% - 25px);
   }
 }
+.contact-legal {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.contact-legal a {
+  border-bottom: 1px solid currentColor;
+}
