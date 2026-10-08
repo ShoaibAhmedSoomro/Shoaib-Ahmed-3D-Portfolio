@@ -1,19 +1,21 @@
 import "../../styles/About.css";
+import { yearsOfExperience } from "../../data/profile";
 
 const About = () => {
+  const years = yearsOfExperience();
   return (
     <div className="about-section" id="about">
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          I build what you see and what keeps it standing: React on the front, Node and Python behind it, Linux and cloud
-          underneath, with a little AI where it earns its keep. 13+ years in, I still care about the same thing: software
-          that is a joy to use and boring to run.
+          I am an IT infrastructure engineer and web developer with {years} years of experience. I look after servers,
+          cloud systems and company IT, and I build the web apps that run on them. I mostly work with React, Node.js,
+          Python and Linux.
         </p>
         <ul className="about-facts" aria-label="Quick facts">
-          <li><strong>13+</strong> years</li>
-          <li><strong>IT Infra</strong> @ Asico</li>
-          <li><strong>BS CS</strong> Univ. of Sindh</li>
+          <li><strong>{years} years</strong> of experience</li>
+          <li><strong>IT Infrastructure</strong> at Asico</li>
+          <li><strong>BS</strong> Computer Science</li>
           <li><strong>ISO 27001</strong> Associate</li>
         </ul>
       </div>

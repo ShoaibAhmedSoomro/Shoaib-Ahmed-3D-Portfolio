@@ -8,30 +8,30 @@ export interface CareerEntry {
 export const careerEntries: CareerEntry[] = [
   {
     role: "IT Infrastructure Engineer",
-    company: "Asico Real Estate LLC — Dubai (Remote)",
+    company: "Asico Real Estate LLC, Dubai (Remote)",
     period: "NOW",
     description:
-      "Keeping the infrastructure healthy and the web apps shipping: internal tools, customer-facing platforms and AI-assisted features, all built to be maintained, not just launched.",
+      "Manage the company servers and cloud setup, and build and maintain the internal and customer web apps that run on them.",
   },
   {
     role: "Web Developer",
-    company: "Pak Affairs — Islamabad",
+    company: "Pak Affairs, Islamabad",
     period: "2023-24",
     description:
-      "Took web features from idea to production, then stayed to hunt the bugs and refactor the rough edges until things stopped breaking.",
+      "Built website features from the first version to production, and fixed bugs in live systems.",
   },
   {
     role: "Remote Monitoring & Control Specialist",
     company: "ACT Group (Wind Power Plant)",
     period: "2020-22",
     description:
-      "Watched live turbine data around the clock, spotted trends before they became faults and coordinated maintenance, where downtime is measured in megawatts.",
+      "Monitored wind turbines in real time, tracked performance trends and coordinated maintenance work.",
   },
   {
-    role: "Intern — Cyber Crime Wing",
+    role: "Intern, Cyber Crime Wing",
     company: "Federal Investigation Agency (FIA), NR3C",
     period: "2019",
     description:
-      "First taste of the other side: security-testing web apps, triaging small incidents and peeking into threat research and malware analysis.",
+      "Tested web applications for security problems, helped sort small incidents and learned the basics of threat research and malware analysis.",
   },
 ];

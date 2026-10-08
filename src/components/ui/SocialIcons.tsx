@@ -29,12 +29,18 @@ const SocialIcons = () => {
       let cancelled = false;
 
       const updatePosition = () => {
+        rafId = 0;
         if (cancelled) return;
         currentX += (mouseX - currentX) * 0.1;
         currentY += (mouseY - currentY) * 0.1;
         (link as HTMLElement).style.setProperty("--siLeft", `${currentX}px`);
         (link as HTMLElement).style.setProperty("--siTop", `${currentY}px`);
-        rafId = requestAnimationFrame(updatePosition);
+        if (Math.abs(mouseX - currentX) > 0.05 || Math.abs(mouseY - currentY) > 0.05) {
+          rafId = requestAnimationFrame(updatePosition);
+        }
+      };
+      const kick = () => {
+        if (!rafId && !cancelled) rafId = requestAnimationFrame(updatePosition);
       };
 
       const onMove = (e: MouseEvent) => {
@@ -48,10 +54,11 @@ const SocialIcons = () => {
           mouseX = rect.width / 2;
           mouseY = rect.height / 2;
         }
+        kick();
       };
 
       document.addEventListener("mousemove", onMove);
-      rafId = requestAnimationFrame(updatePosition);
+      kick();
       cleanups.push(() => {
         cancelled = true;
         cancelAnimationFrame(rafId);

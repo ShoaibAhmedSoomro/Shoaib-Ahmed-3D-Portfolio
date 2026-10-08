@@ -13,11 +13,13 @@
 type Subscriber = (hue: number) => void;
 
 const PERIOD_MS = 8000; // full red → green → blue → red cycle
-const STATIC_HUE = 270; // fallback hue (purple) for reduced-motion users
+const STATIC_HUE = 270;
+const FRAME_MS = 66; // ~15 fps: each hue write restyles the whole page, so keep it cheap // fallback hue (purple) for reduced-motion users
 
 const subscribers = new Set<Subscriber>();
 let started = false;
 let rafId = 0;
+let lastApplied = 0;
 
 function applyHue(hue: number) {
   document.documentElement.style.setProperty("--accentHue", hue.toFixed(2));
@@ -36,8 +38,10 @@ export function startRgbCycle() {
 
   const start = performance.now();
   const loop = (t: number) => {
-    const hue = (((t - start) / PERIOD_MS) * 360) % 360;
-    applyHue(hue);
+    if (t - lastApplied >= FRAME_MS) {
+      lastApplied = t;
+      applyHue((((t - start) / PERIOD_MS) * 360) % 360);
+    }
     rafId = requestAnimationFrame(loop);
   };
   rafId = requestAnimationFrame(loop);

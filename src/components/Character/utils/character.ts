@@ -47,7 +47,7 @@ const setCharacter = (
             if (footL) footL.position.y = 3.36;
             dracoLoader.dispose();
           } catch {
-            // Non-fatal — character is already resolved.
+            // Non-fatal: character is already resolved.
           }
         },
         undefined,

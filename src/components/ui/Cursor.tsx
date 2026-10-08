@@ -12,6 +12,9 @@ const Cursor = () => {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+    const dur = reducedMotion ? 0 : 0.1;
+    const xTo = gsap.quickTo(cursor, "x", { duration: dur });
+    const yTo = gsap.quickTo(cursor, "y", { duration: dur });
     let hover = false;
     let rafId = 0;
     const mousePos = { x: 0, y: 0 };
@@ -28,11 +31,8 @@ const Cursor = () => {
         const delay = 6;
         cursorPos.x += (mousePos.x - cursorPos.x) / delay;
         cursorPos.y += (mousePos.y - cursorPos.y) / delay;
-        gsap.to(cursor, {
-          x: cursorPos.x,
-          y: cursorPos.y,
-          duration: reducedMotion ? 0 : 0.1,
-        });
+        xTo(cursorPos.x);
+        yTo(cursorPos.y);
       }
       rafId = requestAnimationFrame(loop);
     };

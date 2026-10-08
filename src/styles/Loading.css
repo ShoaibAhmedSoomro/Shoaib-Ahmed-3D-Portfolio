@@ -222,6 +222,7 @@
 .loader-logo {
   height: 30px;
   width: auto;
+  color: #0b080c; /* the loading screen is always light */
 }
 
 @keyframes blink {

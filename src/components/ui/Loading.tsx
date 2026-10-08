@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../styles/Loading.css";
 import { useLoading } from "../../context/LoadingProvider";
+import Logo from "./Logo";
 
 import Marquee from "react-fast-marquee";
 
@@ -54,7 +55,7 @@ const Loading = ({ percent }: { percent: number }) => {
     <>
       <div className="loading-header">
         <a href="/#" className="loader-title" data-cursor="disable">
-          <img src="/images/logo.webp" alt="Shoaib Ahmed" className="loader-logo" />
+          <Logo className="loader-logo" />
         </a>
         <div className={`loaderGame ${clicked && "loader-out"}`}>
           <div className="loaderGame-container">

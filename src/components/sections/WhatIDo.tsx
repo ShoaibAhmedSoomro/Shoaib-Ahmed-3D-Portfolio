@@ -11,16 +11,14 @@ import {
   SiMysql,
   SiNextdotjs,
   SiNodedotjs,
-  SiExpress,
   SiPython,
   SiReact,
-  SiSocketdotio,
   SiTailwindcss,
   SiThreedotjs,
   SiTypescript,
 } from "react-icons/si";
 import { FaMicrosoft } from "react-icons/fa6";
-import { LuCode, LuPlug, LuSmartphone, LuSparkles } from "react-icons/lu";
+import { LuPlug, LuSmartphone } from "react-icons/lu";
 
 type Tag = [string, IconType];
 
@@ -37,17 +35,13 @@ const frontendTags: Tag[] = [
 
 const backendTags: Tag[] = [
   ["Node.js", SiNodedotjs],
-  ["Express.js", SiExpress],
   ["Python", SiPython],
-  ["REST APIs", LuPlug],
   ["MySQL", SiMysql],
-  ["Google Cloud", SiGooglecloud],
-  ["Socket.IO", SiSocketdotio],
-  ["AI Integration", LuSparkles],
   ["Linux", SiLinux],
-  ["CI/CD", SiGithubactions],
+  ["Google Cloud", SiGooglecloud],
   ["Microsoft 365", FaMicrosoft],
-  ["Clean code", LuCode],
+  ["CI/CD", SiGithubactions],
+  ["REST APIs", LuPlug],
 ];
 
 const Tags = ({ items }: { items: Tag[] }) => (
@@ -143,12 +137,11 @@ const WhatIDo = () => {
 
             <div className="what-content-in">
               <h3>FRONTEND</h3>
-              <h4>The pitch</h4>
+              <h4>Description</h4>
               <p>
-                Interfaces that load fast, look sharp and get out of the
-                user's way, with just enough motion to be remembered.
+                I build web pages and apps that load quickly, work well on phones and are easy to use.
               </p>
-              <h5>Tools of the trade</h5>
+              <h5>Skills and tools</h5>
               <div className="what-content-flex">
                 <Tags items={frontendTags} />
               </div>
@@ -175,12 +168,11 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
             <div className="what-content-in">
               <h3>BACKEND & CLOUD</h3>
-              <h4>The pitch</h4>
+              <h4>Description</h4>
               <p>
-                The engine room: APIs that answer, servers that stay up,
-                and AI features that actually earn their place.
+                I build the server side: APIs, databases and hosting. I also set up and look after servers and cloud systems.
               </p>
-              <h5>Tools of the trade</h5>
+              <h5>Skills and tools</h5>
               <div className="what-content-flex">
                 <Tags items={backendTags} />
               </div>

@@ -5,22 +5,22 @@ const steps = [
   {
     Icon: LuCompass,
     title: "Understand",
-    text: "I ask the awkward questions early, so nobody has to answer them at 2 a.m. later.",
+    text: "Find out what the real problem is, who will use it and what must never break.",
   },
   {
     Icon: LuPencilRuler,
-    title: "Shape",
-    text: "Sketch the architecture, pick boring tech where it counts, and keep the clever bits for where users can feel them.",
+    title: "Plan",
+    text: "Choose simple, proven tools and agree on the steps before writing any code.",
   },
   {
     Icon: LuHammer,
     title: "Build",
-    text: "Small, reviewable steps: typed code, sane APIs and components I would be happy to inherit.",
+    text: "Write clear code in small steps that are easy to review.",
   },
   {
     Icon: LuRadar,
-    title: "Keep it alive",
-    text: "Deploy, watch, tune. Shipping is the starting line; logs, uptime and fast fixes are the real finish.",
+    title: "Maintain",
+    text: "Deploy, watch the logs and fix problems quickly after launch.",
   },
 ];
 

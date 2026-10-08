@@ -233,7 +233,6 @@ npm run dev
 ## 📁 Static Assets
 
 ### Images (`public/images/`)
-- `logo.webp` - Site logo and favicon
 - `react2.webp`, `next2.webp`, etc. - Tech stack sphere textures
 - `placeholder.webp` - Project placeholder image
 
@@ -287,24 +286,24 @@ npm run dev
 | About text and quick facts | `src/components/sections/About.tsx` |
 | Skills tags | `src/components/sections/WhatIDo.tsx` |
 
-**Theming** — dark is the default; light mode is a token swap, not a second stylesheet. Semantic tokens (`--backgroundColor`, `--fg`, `--fgMute`, `--line`, `--surface`, ...) live in `src/styles/index.css`, with the light overrides under `:root[data-theme="light"]`. Never hard-code colours in component CSS; use a token. The inline script in `index.html` (and `public/theme.js` for static pages) applies the saved or OS theme before first paint; `src/utils/theme.ts` and `ThemeToggle` handle the switch.
+**Theming:** dark is the default; light mode is a token swap, not a second stylesheet. Semantic tokens (`--backgroundColor`, `--fg`, `--fgMute`, `--line`, `--surface`, ...) live in `src/styles/index.css`, with the light overrides under `:root[data-theme="light"]`. Never hard-code colours in component CSS; use a token. The inline script in `index.html` (and `public/theme.js` for static pages) applies the saved or OS theme before first paint; `src/utils/theme.ts` and `ThemeToggle` handle the switch.
 
-**Icons** — brand logos come from Simple Icons via `react-icons/si` (also rendered to the 3D tech-stack balls in `TechStack.tsx`); UI icons use Lucide (`react-icons/lu`). Add a tech ball by appending to the `techs` array.
+**Icons:** brand logos come from Simple Icons via `react-icons/si` (also rendered to the 3D tech-stack balls in `TechStack.tsx`); UI icons use Lucide (`react-icons/lu`). Add a tech ball by appending to the `techs` array.
 
-**Extra sections** — `Process`, `Credentials` and `Cta` (`src/components/sections/`, styles in `Extra.css`) sit around Career/Work and do not touch the character scroll timelines.
+**Extra sections:** `Process`, `Credentials` and `Cta` (`src/components/sections/`, styles in `Extra.css`) sit around Career/Work and do not touch the character scroll timelines.
 
 **Fonts** (loaded in `index.html`, tokens in `src/styles/index.css`): Bricolage Grotesque for headings (`--font-head`), Plus Jakarta Sans for body (`--font-body`), JetBrains Mono for labels (`--font-mono`).
 
-**Icons & branding** — the logo is an "S" inside curly braces, a developer and server-rack motif (`public/favicon.svg`, concepts in `logos/`). Derived files: `favicon.ico`, `favicon-16/32.png`, `apple-touch-icon.png`, `icon-192/512.png`, `icon-maskable-512.png`, `og-image.png` (1200×630) and the white `images/logo.webp` used in the navbar/loader. Regenerate them all if the logo changes.
+**Icons & branding:** the logo is an "S" inside curly braces, a developer and server-rack motif (`public/favicon.svg`, concepts in `logos/`). Derived files: `favicon.ico`, `favicon-16/32.png`, `apple-touch-icon.png`, `icon-192/512.png`, `icon-maskable-512.png`, `og-image.png` (1200×630). The navbar and loader use the inline `Logo.tsx` (currentColor); the navbar copy uses `mix-blend-mode: difference` so it contrasts with any background and theme. Regenerate the rasters if the logo changes.
 
 **SEO checklist** (domain `https://shoaibahmedsoomro.eu.cc`; `www.` redirects to it via `vercel.json`)
 - `index.html`: title, description, canonical, Open Graph/Twitter, JSON-LD (`WebSite` + `Person`)
 - `public/robots.txt`, `public/sitemap.xml`, `public/llms.txt`, `public/site.webmanifest`
 - When the domain or job title changes, update all of the above plus `public/*.html`.
 
-**Static pages** — `public/privacy.html`, `terms.html`, `disclaimer.html` and `404.html` share `public/legal.css`; Vercel serves them at `/privacy`, `/terms`, `/disclaimer` (`cleanUrls`) and uses `404.html` for unknown URLs. Add new ones to `sitemap.xml`.
+**Static pages:** `public/privacy.html`, `terms.html`, `disclaimer.html` and `404.html` share `public/legal.css`; Vercel serves them at `/privacy`, `/terms`, `/disclaimer` (`cleanUrls`) and uses `404.html` for unknown URLs. Add new ones to `sitemap.xml`.
 
-**Deploy** — push to `main`; Vercel builds with `npm run build` (output `dist/`).
+**Deploy:** push to `main`; Vercel builds with `npm run build` (output `dist/`).
 
 ---
 

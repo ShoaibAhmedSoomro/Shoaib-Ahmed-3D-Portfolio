@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { Component, useRef, useMemo, useState, useEffect, type ReactNode } from "react";
+import { useLoading } from "../../context/LoadingProvider";
 import { renderToStaticMarkup } from "react-dom/server";
 import type { IconType } from "react-icons";
 import {
@@ -177,6 +178,15 @@ const TechStack = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
   const [shouldMount, setShouldMount] = useState(false);
+  const { isLoading } = useLoading();
+
+  // Warm up (textures, physics WASM, shader compile) shortly after the intro,
+  // while the user is still near the top, instead of freezing the scroll later.
+  useEffect(() => {
+    if (isLoading) return;
+    const id = window.setTimeout(() => setShouldMount(true), 4000);
+    return () => clearTimeout(id);
+  }, [isLoading]);
   const [materials, setMaterials] = useState<THREE.MeshPhysicalMaterial[]>([]);
   const [sphereCount] = useState(() => (window.innerWidth <= 768 ? 15 : 30));
 
@@ -236,11 +246,13 @@ const TechStack = () => {
 
   return (
     <div className="techstack" ref={containerRef}>
-      <h2>The toolbox</h2>
+      <h2>My tech stack</h2>
       {shouldMount && materials.length > 0 && (
         <CanvasBoundary>
         <Canvas
           shadows
+          frameloop={isActive ? "always" : "demand"}
+          dpr={[1, 1.5]}
           gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
           camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
           onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
@@ -256,7 +268,7 @@ const TechStack = () => {
             shadow-mapSize={[512, 512]}
           />
           <directionalLight position={[0, 5, -4]} intensity={2} />
-          <Physics gravity={[0, 0, 0]}>
+          <Physics gravity={[0, 0, 0]} paused={!isActive}>
             <Pointer isActive={isActive} />
             {spheres.map((spec, i) => (
               <SphereGeo

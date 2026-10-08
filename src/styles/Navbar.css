@@ -50,9 +50,25 @@
   letter-spacing: 0.2px;
 }
 
+.brand-logo {
+  position: fixed;
+  top: 20px;
+  left: calc((100% - var(--cWidth)) / 2);
+  z-index: 9999;
+  display: flex;
+  color: #fff;
+  /* White + difference = always the inverse of whatever is behind it, in both themes. */
+  mix-blend-mode: difference;
+}
+
 .navbar-logo {
   height: 30px;
   width: auto;
+  display: block;
+}
+
+.header nav {
+  margin-left: auto;
 }
 
 @media only screen and (min-width: 500px) {
@@ -84,6 +100,10 @@
 @media only screen and (min-width: 1200px) {
   .header {
     padding: 35px 0px;
+  }
+
+  .brand-logo {
+    top: 35px;
   }
 
   .header ul {

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import "../../styles/Navbar.css";
@@ -53,15 +54,12 @@ const Navbar = () => {
   }, []);
   return (
     <>
+      {/* Outside the header on purpose: a blend mode can only see the page behind it
+          if no ancestor forms its own stacking context. */}
+      <a href="/#" className="brand-logo" data-cursor="disable" aria-label="Shoaib Ahmed, home">
+        <Logo className="navbar-logo" />
+      </a>
       <header className="header" role="banner">
-        <a
-          href="/#"
-          className="navbar-title"
-          data-cursor="disable"
-          aria-label="Shoaib Ahmed — home"
-        >
-          <img src="/images/logo.webp" alt="Shoaib Ahmed logo" className="navbar-logo" />
-        </a>
         <a
           href="mailto:soomro.shoaibahmed@gmail.com"
           className="navbar-connect"

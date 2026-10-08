@@ -6,7 +6,7 @@ const Contact = () => {
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
-        <h3>Say hello</h3>
+        <h3>Contact</h3>
         <div className="contact-flex">
           <div className="contact-box">
             <h4>Email</h4>
@@ -16,7 +16,7 @@ const Contact = () => {
               </a>
             </p>
             <h4>Location</h4>
-            <p>Sindh, Pakistan. Remote-first, and happy to pack a bag for the right team.</p>
+            <p>Sindh, Pakistan. Open to remote work or relocation.</p>
           </div>
           <div className="contact-box">
             <h4>Social</h4>

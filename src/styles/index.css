@@ -127,7 +127,7 @@ main {
 body {
   margin: 0;
   height: auto;
-  background-color: var(--bgDeep);
+  background-color: var(--backgroundColor);
   flex-grow: 1;
   --cWidth: calc(100% - 30px);
   --cMaxWidth: 1920px;
